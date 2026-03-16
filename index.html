@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reactivación diagnóstica Java 2026 | Profe Macón</title>
+    <meta
+      name="description"
+      content="Banco de ejercicios de reactivación diagnóstica para Programación Avanzada 2026."
+    />
+    <style>
+      :root {
+        --pm-black: #000000;
+        --pm-taupe: #827d7d;
+        --pm-soft: #b2acac;
+        --pm-lilac: #988db3;
+        --pm-teal: #00a99d;
+        --pm-light: #f4f2f5;
+        --pm-white: #ffffff;
+        --shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        --radius-xl: 24px;
+        --radius-lg: 18px;
+        --max: 1200px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          Inter,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(152, 141, 179, 0.18),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(0, 169, 157, 0.14),
+            transparent 28%
+          ),
+          linear-gradient(180deg, var(--pm-white) 0%, var(--pm-light) 100%);
+        color: #171717;
+        line-height: 1.55;
+      }
+
+      .container {
+        width: min(calc(100% - 2rem), var(--max));
+        margin-inline: auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.84);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(152, 141, 179, 0.2);
+      }
+
+      .topbar-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.85rem 0;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        min-width: 0;
+      }
+
+      .brand img {
+        display: block;
+        height: 44px;
+        width: auto;
+        border-radius: 10px;
+        background: var(--pm-white);
+      }
+
+      .brand-text {
+        min-width: 0;
+      }
+
+      .brand-text strong {
+        display: block;
+        color: var(--pm-black);
+        font-size: 1rem;
+        letter-spacing: 0.02em;
+      }
+
+      .brand-text span {
+        display: block;
+        color: #4d4a4a;
+        font-size: 0.92rem;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: flex-end;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #1f1f1f;
+        padding: 0.62rem 0.9rem;
+        border-radius: 999px;
+        border: 1px solid rgba(152, 141, 179, 0.28);
+        background: var(--pm-white);
+        font-size: 0.93rem;
+        font-weight: 600;
+        transition: 0.2s ease;
+      }
+
+      nav a:hover,
+      nav a:focus-visible {
+        background: var(--pm-lilac);
+        color: var(--pm-white);
+        border-color: var(--pm-lilac);
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .hero {
+        padding: 2.4rem 0 1.2rem;
+      }
+
+      .hero-card {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(152, 141, 179, 0.2);
+        box-shadow: var(--shadow);
+        border-radius: var(--radius-xl);
+        padding: 1.5rem;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(0, 169, 157, 0.12);
+        color: #06665f;
+        padding: 0.42rem 0.78rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+      }
+
+      h1 {
+        margin: 0.1rem 0 0.6rem;
+        font-size: clamp(2rem, 3.2vw, 3.4rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      .hero p {
+        margin: 0 0 1rem;
+        color: #3e3a3a;
+        font-size: 1.02rem;
+        max-width: 68ch;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 999px;
+        font-weight: 800;
+        padding: 0.88rem 1.2rem;
+        transition: 0.2s ease;
+        border: 0;
+      }
+
+      .btn-primary {
+        background: var(--pm-black);
+        color: var(--pm-white);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus-visible {
+        transform: translateY(-1px);
+        background: #1a1a1a;
+        outline: none;
+      }
+
+      .btn-secondary {
+        background: var(--pm-teal);
+        color: var(--pm-white);
+      }
+
+      .btn-secondary:hover,
+      .btn-secondary:focus-visible {
+        transform: translateY(-1px);
+        background: #08958b;
+        outline: none;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+        margin-top: 1.2rem;
+      }
+
+      .stat {
+        background: linear-gradient(180deg, var(--pm-white), #faf9fb);
+        border: 1px solid rgba(152, 141, 179, 0.22);
+        border-radius: 18px;
+        padding: 1rem;
+      }
+
+      .stat strong {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--pm-black);
+        line-height: 1;
+        margin-bottom: 0.35rem;
+      }
+
+      .stat span {
+        color: #5a5555;
+        font-size: 0.93rem;
+      }
+
+      .section {
+        padding: 1rem 0 1.5rem;
+      }
+
+      .section h2 {
+        font-size: clamp(1.5rem, 2vw, 2.2rem);
+        margin: 0 0 0.35rem;
+      }
+
+      .lead {
+        color: #544f4f;
+        margin: 0 0 1rem;
+        max-width: 76ch;
+      }
+
+      .route {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 0.8rem;
+      }
+
+      .route-card {
+        background: var(--pm-white);
+        border: 1px solid rgba(152, 141, 179, 0.22);
+        border-radius: var(--radius-lg);
+        padding: 1.1rem;
+        box-shadow: var(--shadow);
+      }
+
+      .route-card h3 {
+        margin: 0.1rem 0 0.5rem;
+        font-size: 1.05rem;
+      }
+
+      .route-card p {
+        margin: 0;
+        color: #595555;
+        font-size: 0.95rem;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 0.9rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border-radius: 999px;
+        padding: 0.5rem 0.8rem;
+        font-size: 0.86rem;
+        font-weight: 800;
+        background: var(--pm-white);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .dot {
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        display: inline-block;
+      }
+
+      .filter-panel {
+        display: grid;
+        gap: 0.85rem;
+        margin: 1.2rem 0 1rem;
+      }
+
+      .filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        align-items: center;
+      }
+
+      .filter-label {
+        font-weight: 800;
+        color: #3c3737;
+        margin-right: 0.15rem;
+      }
+
+      .filter-btn {
+        border: 1px solid rgba(152, 141, 179, 0.32);
+        background: var(--pm-white);
+        color: #232323;
+        border-radius: 999px;
+        padding: 0.64rem 0.9rem;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .filter-btn:hover,
+      .filter-btn:focus-visible {
+        transform: translateY(-1px);
+        outline: none;
+      }
+
+      .filter-btn.active {
+        background: var(--pm-lilac);
+        color: var(--pm-white);
+        border-color: var(--pm-lilac);
+      }
+
+      .results-info {
+        margin: 0 0 1rem;
+        color: #5a5555;
+        font-size: 0.95rem;
+      }
+
+      .exercise-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      details.exercise {
+        background: var(--pm-white);
+        border: 1px solid rgba(152, 141, 179, 0.2);
+        border-radius: 22px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      details.exercise[open] {
+        border-color: rgba(0, 169, 157, 0.32);
+      }
+
+      details.exercise summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 1.2rem 1.2rem 1rem;
+        position: relative;
+      }
+
+      details.exercise summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details.exercise summary::after {
+        content: "+";
+        position: absolute;
+        right: 1.1rem;
+        top: 1rem;
+        width: 2rem;
+        height: 2rem;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(0, 169, 157, 0.12);
+        color: #06665f;
+        font-size: 1.2rem;
+        font-weight: 900;
+      }
+
+      details.exercise[open] summary::after {
+        content: "−";
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0.35rem 0.6rem;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .cat-A {
+        background: rgba(152, 141, 179, 0.16);
+        color: #5a4e7c;
+      }
+
+      .cat-B {
+        background: rgba(0, 169, 157, 0.14);
+        color: #0b6f68;
+      }
+
+      .cat-C {
+        background: rgba(130, 125, 125, 0.14);
+        color: #5f5959;
+      }
+
+      .cat-D {
+        background: rgba(0, 0, 0, 0.08);
+        color: #2a2a2a;
+      }
+
+      .lvl-min {
+        background: #eefbf9;
+        color: #05625b;
+      }
+
+      .lvl-est {
+        background: #f5f1fb;
+        color: #5b4b83;
+      }
+
+      .lvl-des {
+        background: #f7f7f7;
+        color: #373737;
+      }
+
+      .exercise h3 {
+        margin: 0.2rem 2.6rem 0.3rem 0;
+        font-size: 1.2rem;
+        line-height: 1.2;
+        color: #111;
+      }
+
+      .exercise-body {
+        padding: 0 1.2rem 1.2rem;
+      }
+
+      .exercise-body p,
+      .exercise-body li {
+        color: #403c3c;
+      }
+
+      .exercise-body ul,
+      .exercise-body ol {
+        margin: 0.45rem 0 0.95rem 1.15rem;
+        padding: 0;
+      }
+
+      pre {
+        margin: 0.85rem 0 0;
+        background: #131313;
+        color: #f8f8f2;
+        padding: 1rem;
+        border-radius: 16px;
+        overflow: auto;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      code {
+        font-family: Consolas, Monaco, "Courier New", monospace;
+      }
+
+      .footer {
+        padding: 2rem 0 3rem;
+        color: #4d4949;
+      }
+
+      .footer-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        background: var(--pm-white);
+        border: 1px solid rgba(152, 141, 179, 0.2);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        padding: 1.2rem 1.3rem;
+      }
+
+      .footer small {
+        display: block;
+        color: #6d6868;
+        font-size: 0.92rem;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      @media (max-width: 980px) {
+        .route,
+        .exercise-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar-inner {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        nav {
+          justify-content: flex-start;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hero-card {
+          padding: 1.15rem;
+        }
+
+        details.exercise summary {
+          padding: 1rem 0.95rem 0.9rem;
+        }
+
+        .exercise-body {
+          padding: 0 0.95rem 1rem;
+        }
+
+        .footer-card {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .filter-group {
+          align-items: flex-start;
+        }
+
+        .filter-label {
+          width: 100%;
+          margin-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">
+          <img src="LogoPM.jpg" alt="Monograma PM de Profe Macón" />
+          <div class="brand-text">
+            <strong>Profe Macón</strong>
+            <span>Reactivación diagnóstica · Java 2026</span>
+          </div>
+        </div>
+        <nav aria-label="Navegación principal">
+          <a href="#inicio">Inicio</a>
+          <a href="#recorrido">Recorrido sugerido</a>
+          <a href="#ejercicios">Ejercicios</a>
+          <a href="#uso">Cómo trabajar</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="container">
+          <article class="hero-card">
+            <div class="eyebrow">Programación Avanzada · 2.º BT TI</div>
+            <h1>Banco de ejercicios para reactivar conocimientos de Java</h1>
+            <p>
+              Esta página reúne ejercicios breves para volver a poner en marcha
+              lo trabajado en 1.º año: variables, <code>main</code>, estructuras
+              de control, arreglos, búsqueda, conteo, suma, promedio y
+              máximo/mínimo. La idea no es correr, sino recordar, probar,
+              equivocarse y volver a intentar.
+            </p>
+            <p>
+              Encontrarás cuatro tipos de actividades:
+              <strong>interpretar código</strong>,
+              <strong>corregir programas</strong>,
+              <strong>completar fragmentos</strong> y
+              <strong>crear soluciones breves</strong>.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#ejercicios"
+                >Ir a los ejercicios</a
+              >
+              <a class="btn btn-secondary" href="#uso">Ver cómo trabajar</a>
+            </div>
+            <div class="stats" aria-label="Datos rápidos del banco">
+              <div class="stat">
+                <strong>16</strong>
+                <span>ejercicios organizados por categoría</span>
+              </div>
+              <div class="stat">
+                <strong>3</strong>
+                <span>niveles: mínimo viable, estándar y desafío</span>
+              </div>
+              <div class="stat">
+                <strong>4</strong>
+                <span
+                  >formas de practicar: leer, corregir, completar y crear</span
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="recorrido">
+        <div class="container">
+          <h2>Recorrido sugerido</h2>
+          <p class="lead">
+            Podés empezar por ejercicios de lectura, seguir con corrección y
+            completar, y dejar la creación desde cero para el final. No hace
+            falta resolver todo en orden, pero sí conviene avanzar de lo más
+            guiado a lo más autónomo.
+          </p>
+          <div class="route">
+            <article class="route-card">
+              <h3>1. Entrada suave</h3>
+              <p>
+                Empezá por interpretar programas ya hechos. El foco está en
+                entender qué hacen y cómo están armados.
+              </p>
+            </article>
+            <article class="route-card">
+              <h3>2. Ajuste fino</h3>
+              <p>
+                Después pasá a corregir y completar código. Ahí aparece más
+                claramente si recordás sintaxis y lógica.
+              </p>
+            </article>
+            <article class="route-card">
+              <h3>3. Autonomía</h3>
+              <p>
+                Terminá con programas breves desde cero. No tienen trampa: son
+                problemas simples para recuperar confianza.
+              </p>
+            </article>
+          </div>
+
+          <div class="legend" aria-label="Leyenda de categorías y niveles">
+            <span class="pill"
+              ><span class="dot" style="background: #988db3"></span> A ·
+              Interpretar</span
+            >
+            <span class="pill"
+              ><span class="dot" style="background: #00a99d"></span> B ·
+              Corregir</span
+            >
+            <span class="pill"
+              ><span class="dot" style="background: #827d7d"></span> C ·
+              Completar</span
+            >
+            <span class="pill"
+              ><span class="dot" style="background: #000000"></span> D ·
+              Crear</span
+            >
+            <span class="pill"
+              ><span class="dot" style="background: #00a99d"></span> Mínimo
+              viable</span
+            >
+            <span class="pill"
+              ><span class="dot" style="background: #988db3"></span>
+              Estándar</span
+            >
+            <span class="pill"
+              ><span class="dot" style="background: #494949"></span>
+              Desafío</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="ejercicios">
+        <div class="container">
+          <h2>Ejercicios</h2>
+          <p class="lead">
+            Podés filtrar por categoría, por nivel o por ambos al mismo tiempo.
+            Cada tarjeta se abre para mostrar la consigna completa y, cuando
+            corresponde, el código.
+          </p>
+
+          <div class="filter-panel" aria-label="Filtros de ejercicios">
+            <div class="filter-group">
+              <span class="filter-label">Categoría:</span>
+              <button
+                class="filter-btn active"
+                data-group="category"
+                data-filter="all-cat"
+              >
+                Todas
+              </button>
+              <button
+                class="filter-btn"
+                data-group="category"
+                data-filter="cat-A"
+              >
+                Interpretar
+              </button>
+              <button
+                class="filter-btn"
+                data-group="category"
+                data-filter="cat-B"
+              >
+                Corregir
+              </button>
+              <button
+                class="filter-btn"
+                data-group="category"
+                data-filter="cat-C"
+              >
+                Completar
+              </button>
+              <button
+                class="filter-btn"
+                data-group="category"
+                data-filter="cat-D"
+              >
+                Crear
+              </button>
+            </div>
+
+            <div class="filter-group">
+              <span class="filter-label">Nivel:</span>
+              <button
+                class="filter-btn active"
+                data-group="level"
+                data-filter="all-lvl"
+              >
+                Todos
+              </button>
+              <button
+                class="filter-btn"
+                data-group="level"
+                data-filter="lvl-min"
+              >
+                Mínimo viable
+              </button>
+              <button
+                class="filter-btn"
+                data-group="level"
+                data-filter="lvl-est"
+              >
+                Estándar
+              </button>
+              <button
+                class="filter-btn"
+                data-group="level"
+                data-filter="lvl-des"
+              >
+                Desafío
+              </button>
+            </div>
+          </div>
+
+          <p class="results-info">
+            <span id="visible-count">16</span> ejercicios visibles
+          </p>
+
+          <div class="exercise-grid">
+            <details class="exercise cat-A lvl-min">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-A">A · Interpretar</span>
+                  <span class="badge lvl-min">Mínimo viable</span>
+                </div>
+                <h3>1. ¿Qué hace este programa?</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Explicá qué problema resuelve el programa.</li>
+                  <li>Indicá qué valor mostrará en pantalla.</li>
+                  <li>Decí para qué sirve la variable <code>mayor</code>.</li>
+                  <li>Explicá qué función cumple el <code>for</code>.</li>
+                </ol>
+                <pre><code>public class Ejercicio1 {
+    public static void main(String[] args) {
+        int[] numeros = {12, 7, 25, 9, 18};
+        int mayor = numeros[0];
+
+        for (int i = 1; i &lt; numeros.length; i++) {
+            if (numeros[i] &gt; mayor) {
+                mayor = numeros[i];
+            }
+        }
+
+        System.out.println("El mayor es: " + mayor);
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-A lvl-min">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-A">A · Interpretar</span>
+                  <span class="badge lvl-min">Mínimo viable</span>
+                </div>
+                <h3>2. ¿Qué imprime y por qué?</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Explicá qué hace el programa con el arreglo.</li>
+                  <li>
+                    Indicá qué significa la condición
+                    <code>numeros[i] % 2 == 0</code>.
+                  </li>
+                  <li>
+                    Decí qué valor tendrá la variable <code>contador</code> al
+                    final.
+                  </li>
+                  <li>Escribí qué salida mostrará el programa.</li>
+                </ol>
+                <pre><code>public class Ejercicio2 {
+    public static void main(String[] args) {
+        int[] numeros = {4, 7, 10, 13, 2, 9};
+        int contador = 0;
+
+        for (int i = 0; i &lt; numeros.length; i++) {
+            if (numeros[i] % 2 == 0) {
+                contador++;
+            }
+        }
+
+        System.out.println("Cantidad de pares: " + contador);
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-A lvl-des">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-A">A · Interpretar</span>
+                  <span class="badge lvl-des">Desafío</span>
+                </div>
+                <h3>3. Explicá paso a paso</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Decí qué intenta averiguar el programa.</li>
+                  <li>
+                    Explicá qué representa la variable <code>encontrado</code>.
+                  </li>
+                  <li>Indicá en qué momento cambia su valor.</li>
+                  <li>Escribí qué mensaje se mostrará al final.</li>
+                  <li>
+                    Contá con tus palabras qué hace el programa paso a paso.
+                  </li>
+                </ol>
+                <pre><code>public class Ejercicio3 {
+    public static void main(String[] args) {
+        int[] numeros = {3, 8, 15, 20, 6};
+        int buscado = 15;
+        boolean encontrado = false;
+
+        for (int i = 0; i &lt; numeros.length; i++) {
+            if (numeros[i] == buscado) {
+                encontrado = true;
+            }
+        }
+
+        if (encontrado) {
+            System.out.println("El número está en el arreglo.");
+        } else {
+            System.out.println("El número no está en el arreglo.");
+        }
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-B lvl-min">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-B">B · Corregir</span>
+                  <span class="badge lvl-min">Mínimo viable</span>
+                </div>
+                <h3>4. Programa básico con errores</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Identificá los errores del código.</li>
+                  <li>Corregilo completo.</li>
+                  <li>Decí cómo debería quedar funcionando.</li>
+                </ol>
+                <pre><code>public class Ejercicio4 {
+    public static void main(String args) {
+        int numero = 10
+        System.out.println("El número es: " + numero)
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-B lvl-est">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-B">B · Corregir</span>
+                  <span class="badge lvl-est">Estándar</span>
+                </div>
+                <h3>5. Corregir el recorrido de un arreglo</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Señalá cuáles son los errores.</li>
+                  <li>Corregilos.</li>
+                  <li>
+                    Explicá por qué esos errores impedían que funcionara
+                    correctamente.
+                  </li>
+                </ol>
+                <pre><code>public class Ejercicio5 {
+    public static void main(String[] args) {
+        int[] numeros = {5, 8, 12, 3, 9};
+
+        for (int i = 0; i &lt;= numeros.length; i++) {
+            System.out.println(numeros[i]);
+        }
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-B lvl-est">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-B">B · Corregir</span>
+                  <span class="badge lvl-est">Estándar</span>
+                </div>
+                <h3>6. Corregir el algoritmo del mayor</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Corregí el programa.</li>
+                  <li>Explicá cuál era el problema en la comparación.</li>
+                  <li>
+                    Indicá cuál debería ser el resultado final con el arreglo
+                    dado.
+                  </li>
+                </ol>
+                <pre><code>public class Ejercicio6 {
+    public static void main(String[] args) {
+        int[] numeros = {14, 22, 9, 31, 18};
+        int mayor = 0;
+
+        for (int i = 0; i &lt; numeros.length; i++) {
+            if (numeros[i] &lt; mayor) {
+                mayor = numeros[i];
+            }
+        }
+
+        System.out.println("El mayor es: " + mayor);
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-B lvl-des">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-B">B · Corregir</span>
+                  <span class="badge lvl-des">Desafío</span>
+                </div>
+                <h3>7. Corregir una búsqueda en arreglo</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Corregí los errores del programa.</li>
+                  <li>Explicá qué estaba mal en la variable booleana.</li>
+                  <li>Indicá qué salida correcta debería tener.</li>
+                </ol>
+                <pre><code>public class Ejercicio7 {
+    public static void main(String[] args) {
+        int[] numeros = {2, 4, 6, 8, 10};
+        int buscado = 6;
+        boolean encontrado = true;
+
+        for (int i = 0; i &lt; numeros.length; i++) {
+            if (numeros[i] != buscado) {
+                encontrado = false;
+            }
+        }
+
+        if (encontrado = true) {
+            System.out.println("Está en el arreglo.");
+        } else {
+            System.out.println("No está en el arreglo.");
+        }
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-C lvl-min">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-C">C · Completar</span>
+                  <span class="badge lvl-min">Mínimo viable</span>
+                </div>
+                <h3>8. Completar un <code>for</code></h3>
+              </summary>
+              <div class="exercise-body">
+                <p>
+                  Completá los espacios faltantes para que el programa recorra
+                  el arreglo y muestre todos sus elementos.
+                </p>
+                <pre><code>public class Ejercicio8 {
+    public static void main(String[] args) {
+        int[] numeros = {11, 22, 33, 44, 55};
+
+        for (int i = ___; i &lt; _____________; i++) {
+            System.out.println(_____________);
+        }
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-C lvl-est">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-C">C · Completar</span>
+                  <span class="badge lvl-est">Estándar</span>
+                </div>
+                <h3>9. Completar el conteo de pares</h3>
+              </summary>
+              <div class="exercise-body">
+                <p>
+                  Completá el programa para que cuente cuántos números pares hay
+                  en el arreglo.
+                </p>
+                <pre><code>public class Ejercicio9 {
+    public static void main(String[] args) {
+        int[] numeros = {7, 10, 4, 9, 12, 5};
+        int contador = 0;
+
+        for (int i = 0; i &lt; numeros.length; i++) {
+            if (______________________) {
+                ______________________;
+            }
+        }
+
+        System.out.println("Cantidad de pares: " + ____________);
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-C lvl-est">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-C">C · Completar</span>
+                  <span class="badge lvl-est">Estándar</span>
+                </div>
+                <h3>10. Completar el algoritmo del mayor</h3>
+              </summary>
+              <div class="exercise-body">
+                <p>
+                  Completá el programa para que encuentre el mayor valor del
+                  arreglo.
+                </p>
+                <pre><code>public class Ejercicio10 {
+    public static void main(String[] args) {
+        int[] numeros = {16, 3, 28, 11, 19};
+        int mayor = numeros[0];
+
+        for (int i = 1; i &lt; numeros.length; i++) {
+            if (______________________) {
+                ______________________;
+            }
+        }
+
+        System.out.println("El mayor es: " + mayor);
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-C lvl-des">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-C">C · Completar</span>
+                  <span class="badge lvl-des">Desafío</span>
+                </div>
+                <h3>11. Completar la búsqueda</h3>
+              </summary>
+              <div class="exercise-body">
+                <p>
+                  Completá el programa para que pida un número al usuario e
+                  indique si está dentro del arreglo.
+                </p>
+                <pre><code>import java.util.Scanner;
+
+public class Ejercicio11 {
+    public static void main(String[] args) {
+        Scanner teclado = new Scanner(System.in);
+
+        int[] numeros = {5, 12, 7, 20, 9};
+        boolean encontrado = false;
+
+        System.out.print("Ingrese un número a buscar: ");
+        int buscado = ______________________;
+
+        for (int i = 0; i &lt; numeros.length; i++) {
+            if (__________________________) {
+                encontrado = true;
+            }
+        }
+
+        if (______________________) {
+            System.out.println("El número está en el arreglo.");
+        } else {
+            System.out.println("El número no está en el arreglo.");
+        }
+
+        teclado.close();
+    }
+}</code></pre>
+              </div>
+            </details>
+
+            <details class="exercise cat-D lvl-min">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-D">D · Crear</span>
+                  <span class="badge lvl-min">Mínimo viable</span>
+                </div>
+                <h3>12. Leer 5 números y mostrar el mayor</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Pedí al usuario 5 números enteros.</li>
+                  <li>Guardalos.</li>
+                  <li>Determiná cuál es el mayor.</li>
+                  <li>Mostrá el resultado en pantalla.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="exercise cat-D lvl-des">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-D">D · Crear</span>
+                  <span class="badge lvl-des">Desafío</span>
+                </div>
+                <h3>13. Contar cuántos números son positivos</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Pedí al usuario 6 números enteros.</li>
+                  <li>Contá cuántos de esos números son positivos.</li>
+                  <li>Mostrá el total de números positivos ingresados.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="exercise cat-D lvl-est">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-D">D · Crear</span>
+                  <span class="badge lvl-est">Estándar</span>
+                </div>
+                <h3>14. Dado un arreglo de notas, mostrar suma y promedio</h3>
+              </summary>
+              <div class="exercise-body">
+                <p>Escribí un programa que trabaje con este arreglo:</p>
+                <pre><code>int[] notas = {8, 6, 7, 9, 5, 10};</code></pre>
+                <ol>
+                  <li>Recorré el arreglo.</li>
+                  <li>Calculá la suma total de las notas.</li>
+                  <li>Calculá el promedio.</li>
+                  <li>Mostrá ambos resultados.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="exercise cat-D lvl-est">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-D">D · Crear</span>
+                  <span class="badge lvl-est">Estándar</span>
+                </div>
+                <h3>15. Buscar si un número está en un arreglo</h3>
+              </summary>
+              <div class="exercise-body">
+                <ol>
+                  <li>Definí un arreglo de enteros ya cargado.</li>
+                  <li>Pedí al usuario un número.</li>
+                  <li>Recorré el arreglo para buscarlo.</li>
+                  <li>Indicá si el número fue encontrado o no.</li>
+                </ol>
+              </div>
+            </details>
+
+            <details class="exercise cat-D lvl-des">
+              <summary>
+                <div class="meta">
+                  <span class="badge cat-D">D · Crear</span>
+                  <span class="badge lvl-des">Desafío</span>
+                </div>
+                <h3>16. Mostrar el mayor y cuántas veces aparece</h3>
+              </summary>
+              <div class="exercise-body">
+                <p>Escribí un programa que trabaje con el siguiente arreglo:</p>
+                <pre><code>int[] numeros = {12, 7, 18, 18, 5, 18, 9};</code></pre>
+                <ol>
+                  <li>Encontrá el mayor valor del arreglo.</li>
+                  <li>Contá cuántas veces aparece ese valor.</li>
+                  <li>Mostrá ambos resultados en pantalla.</li>
+                </ol>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="uso">
+        <div class="container">
+          <h2>Cómo trabajar con esta página</h2>
+          <p class="lead">
+            La idea es que puedas usar este banco de ejercicios de dos maneras:
+            primero para practicar en casa y reactivar recuerdos; después, para
+            retomar algunos en clase y ver qué conviene reforzar.
+          </p>
+          <div class="route">
+            <article class="route-card">
+              <h3>En casa</h3>
+              <p>
+                Elegí al menos un ejercicio de cada categoría. Anotá dudas,
+                intentos y errores. No pasa nada si no sale a la primera.
+              </p>
+            </article>
+            <article class="route-card">
+              <h3>En clase</h3>
+              <p>
+                Algunos de estos ejercicios volverán a aparecer. La meta será
+                explicar lo que hiciste, no solo mostrar el resultado.
+              </p>
+            </article>
+            <article class="route-card">
+              <h3>Consejo</h3>
+              <p>
+                Si te bloqueás, empezá por decir con palabras qué debería hacer
+                el programa. Pensar antes de escribir ayuda mucho.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-card">
+        <div>
+          <strong>Profe Macón · Publicado en GitHub Pages</strong>
+        </div>
+        <img
+          src="LogoPM.jpg"
+          alt="PM"
+          style="height: 48px; width: auto; border-radius: 10px"
+        />
+      </div>
+    </footer>
+
+    <script>
+      const buttons = document.querySelectorAll(".filter-btn");
+      const items = document.querySelectorAll(".exercise");
+      const visibleCount = document.getElementById("visible-count");
+
+      const state = {
+        category: "all-cat",
+        level: "all-lvl",
+      };
+
+      function applyFilters() {
+        let count = 0;
+
+        items.forEach((item) => {
+          const matchCategory =
+            state.category === "all-cat" ||
+            item.classList.contains(state.category);
+          const matchLevel =
+            state.level === "all-lvl" || item.classList.contains(state.level);
+
+          const visible = matchCategory && matchLevel;
+          item.classList.toggle("hidden", !visible);
+
+          if (visible) {
+            count++;
+          }
+        });
+
+        visibleCount.textContent = count;
+      }
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const group = btn.dataset.group;
+          const filter = btn.dataset.filter;
+
+          state[group] = filter;
+
+          buttons.forEach((button) => {
+            if (button.dataset.group === group) {
+              button.classList.toggle("active", button === btn);
+            }
+          });
+
+          applyFilters();
+        });
+      });
+
+      applyFilters();
+    </script>
+  </body>
+</html>
